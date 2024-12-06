@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 
 import { Card, Modal } from 'react-bootstrap'
+import SERVER_BASE_URL from '../services/serverUrl';
 
 
-const ProjectCard = () => {
+const ProjectCard = ({displayData}) => {
 
     const [show, setShow] = useState(false);
 
@@ -13,9 +14,9 @@ const ProjectCard = () => {
   return (
     <>
       <Card onClick={handleShow} className='btn shadow' >
-      <Card.Img className='rounded' variant="top" height={'200px'} src="https://images.shiksha.com/mediadata/shikshaOnline/mailers/2021/naukri-learning/oct/28oct/Project-Manager.jpg" />
+      <Card.Img className='rounded' variant="top" height={'200px'} src={`${SERVER_BASE_URL}/uploads/${displayData?.projectImage}`} />
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
+        <Card.Title>{displayData?.title}</Card.Title>
       </Card.Body>
     </Card>
     <Modal size='lg' show={show} centered onHide={handleClose}>
@@ -25,16 +26,16 @@ const ProjectCard = () => {
         <Modal.Body>
           <div className="row">
             <div className="col-lg-6">
-              <img className='img-fluid' src="https://images.shiksha.com/mediadata/shikshaOnline/mailers/2021/naukri-learning/oct/28oct/Project-Manager.jpg" alt="" />
+              <img className='img-fluid' src={`${SERVER_BASE_URL}/uploads/${displayData?.projectImage}`}  alt="" />
             </div>
             <div className="col-lg-6">
-              <h3>Title</h3>
-              <h6>Language Used : <span className='text-danger'>Language</span></h6>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati incidunt sit doloribus accusamus consequuntur. Magni esse doloribus similique aspernatur molestias distinctio quis aliquam dolorum illo assumenda. Ex blanditiis repellat laudantium?</p>
+              <h3>{displayData?.title}</h3>
+              <h6>Language Used : <span className='text-danger'>{displayData?.languages}</span></h6>
+              <p style={{textAlign:'justify'}}> <span className='fw-bolder'>Project OverView : </span> {displayData?.overview}</p>
             </div>
             <div className="mt-2 float-start">
-              <a href="https://github.com/Jishaan-07/E-Cart" target='_blank' className='btn btn-secondary me-2'><i class="fa-brands fa-linkedin"></i></a>
-              <a href="https://recipe-list-app-jishhhh.netlify.app/" target='_blank' className='btn btn-secondary  '><i class="fa-solid fa-link"></i></a>
+              <a href={displayData?.github} target='_blank' className='btn btn-secondary me-2'><i class="fa-brands fa-github"></i></a>
+              <a href={displayData?.website} target='_blank' className='btn btn-secondary  '><i class="fa-solid fa-link"></i></a>
             </div>
           </div>
         </Modal.Body>
