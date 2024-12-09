@@ -30,8 +30,8 @@ export const  userProjectsAPI = async(reqHeader)=>{
 
 
 // all project
-export const  allProjectsAPI = async(reqHeader)=>{
-  return  await commonAPI("GET",`${SERVER_BASE_URL}/all-projects`,{},reqHeader)
+export const  allProjectsAPI = async(reqHeader,searchKey)=>{
+  return  await commonAPI("GET",`${SERVER_BASE_URL}/all-projects?search=${searchKey}`,{},reqHeader)
 }
 
 
